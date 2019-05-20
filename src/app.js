@@ -1,6 +1,6 @@
 const express = require('express');
 const { sayHello, uppercase, firstCharacter, firstCharacters } = require('./lib/strings');
-const { add, subtract, multiply } = require('./lib/numbers');
+const { add, subtract, multiply, divide } = require('./lib/numbers');
 const app = express();
 
 app.use(express.json());
@@ -55,19 +55,17 @@ app.post('/numbers/multiply', (req, res) => {
   }
 });
 
-app.post('/numbers/divide')
-
-describe('POST /divide', () => {
-    xit('divides two numbers', (done) => {
-      chai.request(server)
-        .post('/numbers/divide')
-        .send({ a: 162, b: 3 })
-        .end((err, res) => {
-          expect(err).to.equal(null);
-          expect(res.status).to.equal(200);
-          expect(res.body).to.eql({ result: 54 });
-          done();
-        });
-    });
+app.post('/numbers/divide', (req, res) => {
+  const { a, b } = req.body;
+  if (a === undefined || b === undefined) {
+    res.status(400).json({ error: 'Parameters a and b are required.' });
+  } else if (isNaN(a) || isNaN(b)) {
+    res.status(400).json({ error: 'Parameters "a" and "b" must be valid numbers.' });
+  } else if (Number(b) === 0) {
+    res.status(400).json({ error: 'Unable to divide by 0.' });
+  } else {
+    res.status(200).json({ result: divide(Number(a), Number(b)) });
+  }
+});
 
 module.exports = app;
