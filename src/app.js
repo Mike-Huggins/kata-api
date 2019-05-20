@@ -6,4 +6,6 @@ app.get('/strings/hello/world', (req, res) => {
   res.status(200).send({ result: 'Hello world!' });
 });
 
+test
+
 module.exports = app;
