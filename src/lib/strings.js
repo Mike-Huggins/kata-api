@@ -1,5 +1,5 @@
 const sayHello = (string) => {
- return (`Hello, ${string}!`) // your code here
+ return (`Hello ${string}!`) // your code here
 };
 
 const uppercase = (string) => {
@@ -19,7 +19,7 @@ const firstCharacter = (string) => {
 };
 
 const firstCharacters = (string, n) => {
-  return string.substring(0,n)// your code here
+  return string.substring(0, n);// your code here
 };
 
 module.exports = {
