@@ -1,6 +1,6 @@
 describe('/strings', () => {
   describe('GET /hello/{string}', () => {
-    xit('returns "Hello world!" when passed "world"', (done) => {
+    it('returns "Hello world!" when passed "world"', (done) => {
       chai.request(server)
         .get('/strings/hello/world')
         .end((err, res) => {
