@@ -1,7 +1,9 @@
 const express = require('express');
 const { sayHello, uppercase, firstCharacter, firstCharacters } = require('./lib/strings');
-const { add, subtract } = require('./lib/numbers');
+const { add, subtract, multiply } = require('./lib/numbers');
 const app = express();
+
+app.use(express.json());
 
 app.get('/strings/hello/:string', (req, res) => {
   res.json({ result: sayHello(req.params.string) });
@@ -38,5 +40,34 @@ app.get('/numbers/subtract/:a/from/:b', (req, res) => {
     res.status(200).json({ result: subtract(b, a) });
   }
 });
+
+app.post('/numbers/multiply', (req, res) => {
+  const a = req.body.a;
+  const b = req.body.b;
+  if (a === undefined || b === undefined) {
+    res.status(400).json({ error: 'Parameters \"a\" and \"b\" are required.' });
+  } else {
+    if (isNaN(a) || isNaN(b)) {
+      res.status(400).json({ error: 'Parameters \"a\" and \"b\" must be valid numbers.' });
+    } else {
+      res.json(({ result: multiply(a, b) }));
+    }
+  }
+});
+
+app.post('/numbers/divide')
+
+describe('POST /divide', () => {
+    xit('divides two numbers', (done) => {
+      chai.request(server)
+        .post('/numbers/divide')
+        .send({ a: 162, b: 3 })
+        .end((err, res) => {
+          expect(err).to.equal(null);
+          expect(res.status).to.equal(200);
+          expect(res.body).to.eql({ result: 54 });
+          done();
+        });
+    });
 
 module.exports = app;
