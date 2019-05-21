@@ -1,5 +1,5 @@
 const sayHello = (string) => {
- return (`Hello ${string}!`) // your code here
+  return (`Hello ${string}!`); // your code here
 };
 
 const uppercase = (string) => {

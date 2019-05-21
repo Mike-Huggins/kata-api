@@ -1,25 +1,11 @@
 const express = require('express');
-const { sayHello, uppercase, firstCharacter, firstCharacters } = require('./lib/strings');
 const { add, subtract, multiply, divide, remainder } = require('./lib/numbers');
+const stringsRouter = require('./Routes/strings');
 const app = express();
 
 app.use(express.json());
 
-app.get('/strings/hello/:string', (req, res) => {
-  res.json({ result: sayHello(req.params.string) });
-});
-
-app.get('/strings/upper/:string', (req, res) => {
-  res.json(({ result: uppercase(req.params.string) }));
-});
-
-app.get('/strings/first-character/:string', (req, res) => {
-  res.json(({ result: firstCharacter(req.params.string) }));
-});
-
-app.get('/strings/first-characters/:string', (req, res) => {
-  res.json(({ result: firstCharacters(req.params.string, req.query.length) }));
-});
+app.use('/strings', stringsRouter);
 
 app.get('/numbers/add/:a/and/:b', (req, res) => {
   const a = parseInt(req.params.a, 10);
