@@ -131,7 +131,7 @@ describe('/numbers', () => {
   });
 
   describe('POST /divide', () => {
-    it('divides two numbers', (done) => {
+    xit('divides two numbers', (done) => {
       chai.request(server)
         .post('/numbers/divide')
         .send({ a: 162, b: 3 })
@@ -143,7 +143,7 @@ describe('/numbers', () => {
         });
     });
 
-    it('divides stringified numbers', (done) => {
+    xit('divides stringified numbers', (done) => {
       chai.request(server)
         .post('/numbers/divide')
         .send({ a: '-4', b: '8' })
@@ -155,7 +155,7 @@ describe('/numbers', () => {
         });
     });
 
-    it('divides 0 by a number', (done) => {
+    xit('divides 0 by a number', (done) => {
       chai.request(server)
         .post('/numbers/divide')
         .send({ a: 0, b: 10 })
@@ -167,7 +167,7 @@ describe('/numbers', () => {
         });
     });
 
-    it('errors if dividing by 0', (done) => {
+    xit('errors if dividing by 0', (done) => {
       chai.request(server)
         .post('/numbers/divide')
         .send({ a: 10, b: 0 })
@@ -179,7 +179,7 @@ describe('/numbers', () => {
         });
     });
 
-    it('errors if a parameter is missing', (done) => {
+    xit('errors if a parameter is missing', (done) => {
       chai.request(server)
         .post('/numbers/divide')
         .send({ a: 'fish' })
@@ -191,7 +191,7 @@ describe('/numbers', () => {
         });
     });
 
-    it('errors if the parameters are not numbers', (done) => {
+    xit('errors if the parameters are not numbers', (done) => {
       chai.request(server)
         .post('/numbers/divide')
         .send({ a: 'fish', b: 'chips' })
@@ -204,11 +204,11 @@ describe('/numbers', () => {
     });
   });
 
-  describe('GET /remainder?a={number}&b={number}', () => {
+  describe('POST /remainder?a={number}&b={number}', () => {
     xit('gives the remainder of dividing 18 by 5', (done) => {
       chai.request(server)
         .post('/numbers/remainder')
-        .query({ a: 18, b: 5 })
+        .send({ a: 18, b: 5 })
         .end((err, res) => {
           expect(err).to.equal(null);
           expect(res.status).to.equal(200);
@@ -231,7 +231,7 @@ describe('/numbers', () => {
 
     xit('gives the remainder of dividing 0 by a number', (done) => {
       chai.request(server)
-        .post('/numbers/remainer')
+        .post('/numbers/remainder')
         .send({ a: 0, b: 10 })
         .end((err, res) => {
           expect(err).to.equal(null);
